@@ -1,0 +1,11 @@
+{
+  "name": "vite-proj",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.20.0",
+    "eslint": "9.4.0",
+    "eslint-plugin-format": "^0.1.1"
+  }
+}
