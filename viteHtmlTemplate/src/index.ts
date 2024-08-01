@@ -7,6 +7,7 @@ import type { Options as MinifyOptions } from 'html-minifier-terser'
 import { minify as minifyFn } from 'html-minifier-terser'
 
 interface IInjectData {
+  regx?: string
   data?: Record<string, any>
   tags?: HtmlTagDescriptor[]
   ejsOptions?: EJSOptions
@@ -14,12 +15,12 @@ interface IInjectData {
 
 interface IOptions {
   minify?: boolean | MinifyOptions
-  inject?: { [key: string]: IInjectData }
+  inject?: IInjectData[]
 }
 
 export default function ViteHtmlTemplate(opts: IOptions) {
   let minify = opts.minify
-  const injectData = opts.inject ?? {}
+  const injectData = opts.inject ?? []
   let config: ResolvedConfig
 
   if(minify === null || minify === undefined || minify === true) {
@@ -44,7 +45,16 @@ export default function ViteHtmlTemplate(opts: IOptions) {
         order: 'pre',
         handler: async (html, ctx) => {
           const htmlName = path.basename(ctx.filename)
-          const param = injectData[htmlName]
+
+          let param = {}
+          for (const item of injectData) {
+            const regx = new RegExp(item.regx || '.*')
+            if (regx.test(htmlName)) {
+              param = item
+              break
+            }
+          }
+
           const ejsData: Record<string, any> = {
             ...config.env,
             ...(config.define ?? {}),
