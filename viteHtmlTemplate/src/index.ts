@@ -46,7 +46,7 @@ export default function ViteHtmlTemplate(opts: IOptions) {
         handler: async (html, ctx) => {
           const htmlName = path.basename(ctx.filename)
 
-          let param = {}
+          let param: IInjectData = {}
           for (const item of injectData) {
             const regx = new RegExp(item.regx || '.*')
             if (regx.test(htmlName)) {

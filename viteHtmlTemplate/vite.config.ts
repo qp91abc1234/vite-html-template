@@ -13,7 +13,7 @@ export default defineConfig({
       fileName: 'index',
     },
     rollupOptions: {
-      external: ['node:fs', 'node:path', 'node:url', 'sharp'],
+      external: ['node:path', 'fs', 'path', 'os', 'http', 'https', 'url'],
     },
   },
   plugins: [

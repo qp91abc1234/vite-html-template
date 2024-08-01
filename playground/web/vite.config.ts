@@ -18,13 +18,11 @@ export default defineConfig({
       resolvers: [NaiveUiResolver()],
     }),
     ViteHtmlTemplate({
-      inject: {
-        ['index.html']: {
-          data: {
-            ver: 'vite-pro',
-          },
-        },
-      }
+      inject: [{
+        data: {
+          ver: 'vite-pro'
+        }
+      }]
     }),
   ],
   css: {

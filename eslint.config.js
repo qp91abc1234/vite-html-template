@@ -5,6 +5,7 @@ export default antfu({
   vue: true,
   ignores: [
     'tsconfig.*',
+    '*.md',
   ],
 }, {
   rules: {
